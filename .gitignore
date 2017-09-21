@@ -1,0 +1,12 @@
+# editors
+**/*.swp
+
+# python files
+**/*.pyc
+**/__pycache__
+build/
+dist/
+*.egg*
+
+# os
+.DS_Store
