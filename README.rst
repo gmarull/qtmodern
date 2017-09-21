@@ -15,8 +15,7 @@ comes from `this project <https://github.com/Jorgen-VikingGod/Qt-Frameless-Windo
 .. image:: https://github.com/gmarull/qtmodern/blob/master/examples/mainwindow.png
     :alt: Example
     :width: 50 %
-
-.. _QtPy: https://github.com/spyder-ide/qtpy
+    :align: center
 
 Installation
 ------------
