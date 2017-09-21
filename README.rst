@@ -14,9 +14,9 @@ comes from `this project <https://github.com/Jorgen-VikingGod/Qt-Frameless-Windo
 
 .. raw:: html
 
-    <center>
+    <p align="center">
       <img src="https://github.com/gmarull/qtmodern/blob/master/examples/mainwindow.png" width="50%" alt="Example"/>
-    </center>
+    </p>
 
 Installation
 ------------
