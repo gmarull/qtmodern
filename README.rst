@@ -10,12 +10,13 @@ qtmodern
 better and consistent on multiple platforms. It provides a custom frameless
 window and a dark theme. In order to be compatible with multiple Python Qt
 wrappers `QtPy <https://github.com/spyder-ide/qtpy>`_ is used. The initial idea
-comes from `this project <https://github.com/Jorgen-VikingGod/Qt-Frameless-Window-DarkStyle>`_
+comes from `this project <https://github.com/Jorgen-VikingGod/Qt-Frameless-Window-DarkStyle>`_.
 
-.. image:: https://github.com/gmarull/qtmodern/blob/master/examples/mainwindow.png
-    :alt: Example
-    :width: 50 %
-    :align: center
+.. raw:: html
+
+    <center>
+      <img src="https://github.com/gmarull/qtmodern/blob/master/examples/mainwindow.png" width="50%" alt="Example"/>
+    </center>
 
 Installation
 ------------
