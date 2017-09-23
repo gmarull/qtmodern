@@ -59,6 +59,13 @@ class ModernWindow(QWidget):
         contentLayout.setContentsMargins(0, 0, 0, 0)
         contentLayout.addWidget(w)
 
+        # w's title will get lost after being wrapped by ModernWindow
+        # set the ModernWindow title to w's window title if it exists.
+        # to prevent being overwritten with default value,
+        # this needs to happen after the call to setupUI()
+        if str(w.windowTitle()) != '':
+            self.setTitle(str(w.windowTitle()))
+
         self.windowContent.setLayout(contentLayout)
 
     def setupUi(self):
