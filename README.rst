@@ -2,6 +2,10 @@
 qtmodern
 ========
 
+.. image:: https://travis-ci.org/gmarull/qtmodern.svg?branch=master
+    :target: https://travis-ci.org/gmarull/qtmodern
+    :alt: Travis build
+
 .. image:: https://img.shields.io/pypi/v/qtmodern.svg
     :target: https://pypi.python.org/pypi/qtmodern
     :alt: PyPI Version
