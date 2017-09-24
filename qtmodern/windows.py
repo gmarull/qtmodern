@@ -61,6 +61,9 @@ class ModernWindow(QWidget):
 
         self.windowContent.setLayout(contentLayout)
 
+        self.setWindowTitle(w.windowTitle())
+        self.setGeometry(w.geometry())
+
     def setupUi(self):
         # create title bar, content
         self.vboxWindow = QVBoxLayout(self)
@@ -121,9 +124,6 @@ class ModernWindow(QWidget):
                 Qt.Window | Qt.FramelessWindowHint | Qt.WindowSystemMenuHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
-        # set default size
-        self.setGeometry(0, 0, 1024, 768)
-
         # set stylesheet
         with open(_FL_STYLESHEET) as stylesheet:
             self.setStyleSheet(stylesheet.read())
@@ -131,7 +131,7 @@ class ModernWindow(QWidget):
         # automatically connect slots
         QMetaObject.connectSlotsByName(self)
 
-    def setTitle(self, title):
+    def setWindowTitle(self, title):
         """ Set window title.
 
             Args:
