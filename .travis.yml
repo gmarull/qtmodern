@@ -1,0 +1,12 @@
+language: python
+
+script:
+  - python setup.py sdist
+
+deploy:
+  provider: pypi
+  user: gmarull
+  password:
+    secure: HwUB7bc3EnNwsvBBs7Gvfv7qmMjuqAGqCsKbB8VVLptc13AieQgTkmBE4Cu0+VvZh87RwH9nRnjjea74/Zew5nHSZYH3GnFW39TZM+vLohheW9Qk0EPpfeKK6VNsWXmHosjPcTJs4H1CjICwByqdGhvUz8noqDO8nRf/uF4bgePx4767RLuApXPYW+Xqe4zfGVb2cY0Nl1x3fY15VOAyMUsHzwsoHb81mVberefYm8HEnvWCli/1peYhtqSPQxw34jlWYBW0rLfPAS0+9AAkayAxT3EOphWBPW1zECjjqGzB8rkGi/X7oubcGhHoz8feteEmRizcswWxHEk+YIaCaBtkTFJk4SOzyeB8lOK7DmtrQChG1yFANT4Rr0M3/bR6GVZglZ3OPNIMaIu/VfMBygX52YihrHfp7HwpTew+UmMkQc1W286fJFAem1XYI971ahz2fLAFP7uVk8DUVyrRSldVX4KM4DJCuUpOQtfcV2TEmxOzPvPmZr4B1ZQELv6jbLJ+nH48iyw2V/gTcZecf94haz5sHdBj7znaZJXT4EH38eHF8dD8Mh/1WFzqUNtuSP0l3CWuTbTVFclgVfiPtLfqZ7Qwydk3AdTwHdeDjUHwag//9iefwJEFlj/AbRaV8Ff8YUxLJ0H7jesG23djbb75G6rc9nAEovz01QcJ//o=
+  on:
+    tags: true
