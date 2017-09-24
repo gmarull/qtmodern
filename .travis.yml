@@ -8,6 +8,6 @@ deploy:
   user: gmarull
   password:
     secure: KNAobcPqysdFDa7I/XApnVAaVbAIL3+I/i0Dv/qfDB+QTjtx2qQion7GXBAeMXlZlbGVP8z+1G8dK6se4bAUSYvQAs/RTHJv7ParoaYuTQH/FHWpIXoAiZrPguVilNtYF8Ycm33Pv9k63Dt5miwooiibhrhNNc9HNuK1MHrZVxNgZo8rqZp3JoWhc8yfA1LNTlerAkYELh7ENJhC1H26A2CPORhw77syUwvm0BsJ0jPe5PYRan7TeoIh+NQWVC23E8OukUPx18P0JqjvzuMHSe7v1RMH9I9Wi1tTaptwka97k3Crhptmh6HuBtjgxeIPVi9XbAjM6NLZLinf3ZnRv0ipxr1TJhnJEKsKmsqJy6H2BGV7iYqhRS+HtpRCGkjXXhUkinmFZW10bHNyPnLZXU2MlRerb/ZFmzrh7u4sNmjpUhzaW9LA0uyv2DKNM0PeJ7RUePCeWnuU6gn9yAhk5o+Ip3wleaJB7jP9g+Pb0AwPlphtjxaFEUe45oEdCDqw/JmNBQc9SXhz44fkMGLkvEXGRe3pTAmGUS1Pkuw8b4g2aiH2hX56RTI2Y0mvrQpwBAHcmVWQqX52BkshTEIFXSH63lzEnu8uUfWV/PjAqG99cRpM69kdMbR+jE3hCh9Ww//PlEISgcy2f4dWOUTciEDcnKlthHMfwHBTndLM3l8=
+  server: https://pypi.python.org/pypi
   on:
     branch: master
-    tags: true
