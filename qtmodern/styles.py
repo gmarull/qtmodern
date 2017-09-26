@@ -2,6 +2,7 @@ from os.path import join, dirname, abspath
 
 from qtpy.QtGui import QPalette, QColor
 
+from ._utils import QT_VERSION
 
 _STYLESHEET = join(dirname(abspath(__file__)), 'resources/style.qss')
 """ str: Main stylesheet. """
@@ -14,7 +15,10 @@ def _apply_base_theme(app):
             app (QApplication): QApplication instance.
     """
 
-    app.setStyle('Fusion')
+    if QT_VERSION < (5,):
+        app.setStyle('plastique')
+    else:
+        app.setStyle('Fusion')
 
     with open(_STYLESHEET) as stylesheet:
         app.setStyleSheet(stylesheet.read())

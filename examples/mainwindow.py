@@ -2,31 +2,24 @@ import sys
 from os.path import join, dirname, abspath
 
 from qtpy import uic
-from qtpy.QtCore import Qt
-from qtpy.QtWidgets import QApplication
+from qtpy.QtWidgets import QApplication, QMainWindow
 
 import qtmodern.styles
 import qtmodern.windows
 
 
 _UI = join(dirname(abspath(__file__)), 'mainwindow.ui')
-Ui_MainWindow, QtBaseClass = uic.loadUiType(_UI)
 
 
-class MainWindow(QtBaseClass, Ui_MainWindow):
+class MainWindow(QMainWindow):
     def __init__(self):
-        QtBaseClass.__init__(self)
-        Ui_MainWindow.__init__(self)
+        QMainWindow.__init__(self)
 
-        self.setupUi(self)
+        uic.loadUi(_UI, self)
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-
-    # enable High DPI support
-    if hasattr(Qt, 'AA_UseHighDpiPixmaps'):
-        app.setAttribute(Qt.AA_UseHighDpiPixmaps)
 
     qtmodern.styles.dark(app)
     mw = qtmodern.windows.ModernWindow(MainWindow())

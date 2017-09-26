@@ -4,6 +4,8 @@ from qtpy.QtCore import Qt, QMetaObject, Signal, Slot
 from qtpy.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QToolButton,
                             QLabel, QSizePolicy)
 
+from ._utils import QT_VERSION
+
 
 _FL_STYLESHEET = join(dirname(abspath(__file__)), 'resources/frameless.qss')
 """ str: Frameless window stylesheet. """
@@ -122,7 +124,9 @@ class ModernWindow(QWidget):
         # set window flags
         self.setWindowFlags(
                 Qt.Window | Qt.FramelessWindowHint | Qt.WindowSystemMenuHint)
-        self.setAttribute(Qt.WA_TranslucentBackground)
+
+        if QT_VERSION >= (5,):
+            self.setAttribute(Qt.WA_TranslucentBackground)
 
         # set stylesheet
         with open(_FL_STYLESHEET) as stylesheet:
