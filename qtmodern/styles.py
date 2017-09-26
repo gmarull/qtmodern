@@ -23,10 +23,6 @@ def _apply_base_theme(app):
     with open(_STYLESHEET) as stylesheet:
         app.setStyleSheet(stylesheet.read())
 
-    font = app.font()
-    font.setPointSize(font.pointSize() + 2)
-    app.setFont(font)
-
 
 def dark(app):
     """ Apply Dark Theme to the Qt application instance.
