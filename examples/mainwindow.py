@@ -2,7 +2,8 @@ import sys
 from os.path import join, dirname, abspath
 
 from qtpy import uic
-from qtpy.QtWidgets import QApplication, QMainWindow
+from qtpy.QtCore import Slot
+from qtpy.QtWidgets import QApplication, QMainWindow, QMessageBox
 
 import qtmodern.styles
 import qtmodern.windows
@@ -16,6 +17,19 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self)
 
         uic.loadUi(_UI, self)
+
+    @Slot()
+    def on_pushButton_clicked(self):
+        self.close()
+
+    @Slot()
+    def closeEvent(self, event):
+        reply = QMessageBox.question(self, 'Exit', 'Do you want to exit?')
+
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
 
 
 if __name__ == '__main__':

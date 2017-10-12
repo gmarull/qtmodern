@@ -56,6 +56,7 @@ class ModernWindow(QWidget):
         QWidget.__init__(self, parent)
 
         self.setupUi()
+        self.setupEvents(w)
 
         contentLayout = QHBoxLayout()
         contentLayout.setContentsMargins(0, 0, 0, 0)
@@ -134,6 +135,10 @@ class ModernWindow(QWidget):
 
         # automatically connect slots
         QMetaObject.connectSlotsByName(self)
+
+    def setupEvents(self, w):
+        w.close = self.close
+        self.closeEvent = w.closeEvent
 
     def setWindowTitle(self, title):
         """ Set window title.
