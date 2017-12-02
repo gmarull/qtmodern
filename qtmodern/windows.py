@@ -1,6 +1,6 @@
 from os.path import join, dirname, abspath
 
-from qtpy.QtCore import Qt, QMetaObject, Signal, Slot
+from qtpy.QtCore import Qt, QMetaObject, Signal, Slot, QEvent
 from qtpy.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QToolButton,
                             QLabel, QSizePolicy)
 
@@ -55,8 +55,8 @@ class ModernWindow(QWidget):
     def __init__(self, w, parent=None):
         QWidget.__init__(self, parent)
 
+        self._w = w
         self.setupUi()
-        self.setupEvents(w)
 
         contentLayout = QHBoxLayout()
         contentLayout.setContentsMargins(0, 0, 0, 0)
@@ -66,6 +66,8 @@ class ModernWindow(QWidget):
 
         self.setWindowTitle(w.windowTitle())
         self.setGeometry(w.geometry())
+
+        self.installEventFilter(self)
 
     def setupUi(self):
         # create title bar, content
@@ -136,9 +138,11 @@ class ModernWindow(QWidget):
         # automatically connect slots
         QMetaObject.connectSlotsByName(self)
 
-    def setupEvents(self, w):
-        w.close = self.close
-        self.closeEvent = w.closeEvent
+    def eventFilter(self, source, event):
+        if event.type() == QEvent.Close:
+            return self._w.close()
+
+        return QWidget.eventFilter(self, source, event)
 
     def setWindowTitle(self, title):
         """ Set window title.
