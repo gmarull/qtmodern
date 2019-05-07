@@ -35,6 +35,9 @@ In order to use ``qtmodern``, simply apply the style you want to your
 application and then, create a ``ModernWindow`` enclosing the window you want to
 *modernize*::
 
+    import qtmodern.styles
+    import qtmodern.windows
+
     ...
 
     app = QApplication()
