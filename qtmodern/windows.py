@@ -151,6 +151,7 @@ class ModernWindow(QWidget):
                 title (str): Title.
         """
 
+        super(ModernWindow, self).setWindowTitle(title)
         self.lblTitle.setText(title)
 
     @Slot()
