@@ -403,7 +403,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>670</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTest">
@@ -428,8 +428,16 @@ p, li { white-space: pre-wrap; }
     </widget>
     <addaction name="menuTest2_2"/>
    </widget>
+   <widget class="QMenu" name="menuStyle">
+    <property name="title">
+     <string>Style</string>
+    </property>
+    <addaction name="actionLight"/>
+    <addaction name="actionDark"/>
+   </widget>
    <addaction name="menuTest"/>
    <addaction name="menuTest2"/>
+   <addaction name="menuStyle"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -475,6 +483,16 @@ p, li { white-space: pre-wrap; }
   <action name="actionTest3_2">
    <property name="text">
     <string>Test3</string>
+   </property>
+  </action>
+  <action name="actionLight">
+   <property name="text">
+    <string>Light</string>
+   </property>
+  </action>
+  <action name="actionDark">
+   <property name="text">
+    <string>Dark</string>
    </property>
   </action>
  </widget>

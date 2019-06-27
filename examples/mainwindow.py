@@ -16,7 +16,16 @@ class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
 
-        uic.loadUi(_UI, self)
+        self.ui = uic.loadUi(_UI, self)
+        
+        self.ui.actionLight.triggered.connect(self.lightTheme)
+        self.ui.actionDark.triggered.connect(self.darkTheme)
+
+    def lightTheme(self):
+        qtmodern.styles.light(QApplication.instance())
+
+    def darkTheme(self):
+        qtmodern.styles.dark(QApplication.instance())
 
     @Slot()
     def on_pushButton_clicked(self):

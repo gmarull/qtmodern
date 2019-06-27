@@ -31,8 +31,6 @@ def dark(app):
             app (QApplication): QApplication instance.
     """
 
-    _apply_base_theme(app)
-
     darkPalette = QPalette()
 
     # base
@@ -67,3 +65,51 @@ def dark(app):
                          QColor(127, 127, 127))
 
     app.setPalette(darkPalette)
+    
+    _apply_base_theme(app)
+
+
+def light(app):
+    """ Apply Light Theme to the Qt application instance.
+
+        Args:
+            app (QApplication): QApplication instance.
+    """
+
+    lightPalette = QPalette()
+
+    # base
+    lightPalette.setColor(QPalette.WindowText, QColor(0, 0, 0))
+    lightPalette.setColor(QPalette.Button, QColor(240, 240, 240))
+    lightPalette.setColor(QPalette.Light, QColor(180, 180, 180))
+    lightPalette.setColor(QPalette.Midlight, QColor(200, 200, 200))
+    lightPalette.setColor(QPalette.Dark, QColor(225, 225, 225))
+    lightPalette.setColor(QPalette.Text, QColor(0, 0, 0))
+    lightPalette.setColor(QPalette.BrightText, QColor(0, 0, 0))
+    lightPalette.setColor(QPalette.ButtonText, QColor(0, 0, 0))
+    lightPalette.setColor(QPalette.Base, QColor(237, 237, 237))
+    lightPalette.setColor(QPalette.Window, QColor(240, 240, 240))
+    lightPalette.setColor(QPalette.Shadow, QColor(20, 20, 20))
+    lightPalette.setColor(QPalette.Highlight, QColor(76, 163, 224))
+    lightPalette.setColor(QPalette.HighlightedText, QColor(0, 0, 0))
+    lightPalette.setColor(QPalette.Link, QColor(0, 162, 232))
+    lightPalette.setColor(QPalette.AlternateBase, QColor(225, 225, 225))
+    lightPalette.setColor(QPalette.ToolTipBase, QColor(240, 240, 240))
+    lightPalette.setColor(QPalette.ToolTipText, QColor(0, 0, 0))
+
+    # disabled
+    lightPalette.setColor(QPalette.Disabled, QPalette.WindowText,
+                         QColor(115, 115, 115))
+    lightPalette.setColor(QPalette.Disabled, QPalette.Text,
+                         QColor(115, 115, 115))
+    lightPalette.setColor(QPalette.Disabled, QPalette.ButtonText,
+                         QColor(115, 115, 115))
+    lightPalette.setColor(QPalette.Disabled, QPalette.Highlight,
+                         QColor(190, 190, 190))
+    lightPalette.setColor(QPalette.Disabled, QPalette.HighlightedText,
+                         QColor(115, 115, 115))
+
+    app.setPalette(lightPalette)
+
+    _apply_base_theme(app)
+    
