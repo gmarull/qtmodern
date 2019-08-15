@@ -69,6 +69,10 @@ class ModernWindow(QWidget):
 
         self.installEventFilter(self)
 
+        # Adding attribute to clean up the parent window when the child is closed
+        self._w.setAttribute(Qt.WA_DeleteOnClose, True)
+        self._w.destroyed.connect(self.__child_was_closed)
+
     def setupUi(self):
         # create title bar, content
         self.vboxWindow = QVBoxLayout(self)
@@ -138,8 +142,14 @@ class ModernWindow(QWidget):
         # automatically connect slots
         QMetaObject.connectSlotsByName(self)
 
+    def __child_was_closed(self):
+        self._w = None  # The child was deleted, remove the reference to it and close the parent window
+        self.close()
+
     def eventFilter(self, source, event):
         if event.type() == QEvent.Close:
+            if not self._w:
+                return True
             return self._w.close()
 
         return QWidget.eventFilter(self, source, event)
