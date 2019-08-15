@@ -16,10 +16,10 @@ class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
 
-        self.ui = uic.loadUi(_UI, self)
-        
-        self.ui.actionLight.triggered.connect(self.lightTheme)
-        self.ui.actionDark.triggered.connect(self.darkTheme)
+        uic.loadUi(_UI, self)  # Load the ui into self
+
+        self.actionLight.triggered.connect(self.lightTheme)
+        self.actionDark.triggered.connect(self.darkTheme)
 
     def lightTheme(self):
         qtmodern.styles.light(QApplication.instance())
