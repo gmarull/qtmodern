@@ -56,6 +56,7 @@ class ModernWindow(QWidget):
         QWidget.__init__(self, parent)
 
         self._w = w
+        self._w.ModernWindow = self
         self.setupUi()
 
         contentLayout = QHBoxLayout()

@@ -28,8 +28,14 @@ class MainWindow(QMainWindow):
         qtmodern.styles.dark(QApplication.instance())
 
     @Slot()
-    def on_pushButton_clicked(self):
+    def on_pushButton_clicked(self):  # The ModernWindow automatically connects the slot based on name
         self.close()
+
+    @Slot()
+    def on_pushButton_2_clicked(self):
+        # The ModernWindow have control over the window title, therefore calling self.setWindowTitle will do nothing.
+        # We need to set the window title directly on the ModernWindow
+        self.ModernWindow.setWindowTitle("Changed window title")
 
     @Slot()
     def closeEvent(self, event):
