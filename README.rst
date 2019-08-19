@@ -16,7 +16,7 @@ window and a dark theme. In order to be compatible with multiple Python Qt
 wrappers `QtPy <https://github.com/spyder-ide/qtpy>`_ is used. The initial idea
 comes from `this project <https://github.com/Jorgen-VikingGod/Qt-Frameless-Window-DarkStyle>`_.
 
-.. image:: https://github.com/gmarull/qtmodern/blob/master/examples/mainwindow.png
+.. image:: examples/mainwindow.png
     :width: 450px
     :align: center
     :alt: Example
