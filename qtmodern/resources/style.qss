@@ -119,7 +119,7 @@ QScrollArea {
   border-style: none;
 }
 
-QScrollArea QWidget {
+QScrollArea > QWidget > QWidget {
   background-color: palette(alternate-base);
 }
 
