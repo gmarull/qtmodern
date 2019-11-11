@@ -63,7 +63,7 @@ QScrollBar::handle:vertical {
 }
 
 QScrollBar::handle:vertical:hover, QScrollBar::handle:horizontal:hover, QScrollBar::handle:vertical:pressed, QScrollBar::handle:horizontal:pressed {
-  background-color:palette(highlight);
+  background-color:palette(midlight);
 }
 
 QScrollBar::add-line:vertical {
