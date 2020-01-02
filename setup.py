@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 
-import re
+import qtmodern
 from setuptools import setup
 
-_version = re.search(r'__version__\s+=\s+\'(.*)\'',
-                     open('qtmodern/__init__.py').read()).group(1)
+_version = qtmodern.__version__
 
 setup(name='qtmodern',
       version=_version,
