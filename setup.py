@@ -14,6 +14,7 @@ setup(name='qtmodern',
       author='Gerard Marull-Paretas',
       author_email='gerardmarull@gmail.com',
       url='https://www.github.com/gmarull/qtmodern',
+      license='MIT',
       classifiers=[
           'Development Status :: 3 - Alpha',
           'Intended Audience :: Developers',
