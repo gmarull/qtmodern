@@ -3,8 +3,8 @@ from os.path import join, dirname, abspath
 from qtpy.QtCore import Qt, QMetaObject, Signal, Slot, QEvent
 from qtpy.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QToolButton,
                             QLabel, QSizePolicy)
+from ._utils import QT_VERSION, PLATFORM
 
-from ._utils import QT_VERSION
 
 
 _FL_STYLESHEET = join(dirname(abspath(__file__)), 'resources/frameless.qss')
@@ -94,30 +94,25 @@ class ModernWindow(QWidget):
         self.lblTitle = QLabel('Title')
         self.lblTitle.setObjectName('lblTitle')
         self.lblTitle.setAlignment(Qt.AlignCenter)
-        self.hboxTitle.addWidget(self.lblTitle)
 
         spButtons = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
         self.btnMinimize = QToolButton(self.titleBar)
         self.btnMinimize.setObjectName('btnMinimize')
         self.btnMinimize.setSizePolicy(spButtons)
-        self.hboxTitle.addWidget(self.btnMinimize)
 
         self.btnRestore = QToolButton(self.titleBar)
         self.btnRestore.setObjectName('btnRestore')
         self.btnRestore.setSizePolicy(spButtons)
         self.btnRestore.setVisible(False)
-        self.hboxTitle.addWidget(self.btnRestore)
 
         self.btnMaximize = QToolButton(self.titleBar)
         self.btnMaximize.setObjectName('btnMaximize')
         self.btnMaximize.setSizePolicy(spButtons)
-        self.hboxTitle.addWidget(self.btnMaximize)
 
         self.btnClose = QToolButton(self.titleBar)
         self.btnClose.setObjectName('btnClose')
         self.btnClose.setSizePolicy(spButtons)
-        self.hboxTitle.addWidget(self.btnClose)
 
         self.vboxFrame.addWidget(self.titleBar)
 
@@ -125,6 +120,19 @@ class ModernWindow(QWidget):
         self.vboxFrame.addWidget(self.windowContent)
 
         self.vboxWindow.addWidget(self.windowFrame)
+
+        if PLATFORM == "Darwin":
+            self.hboxTitle.addWidget(self.btnClose)
+            self.hboxTitle.addWidget(self.btnMinimize)
+            self.hboxTitle.addWidget(self.btnRestore)
+            self.hboxTitle.addWidget(self.btnMaximize)
+            self.hboxTitle.addWidget(self.lblTitle)
+        else:
+            self.hboxTitle.addWidget(self.lblTitle)
+            self.hboxTitle.addWidget(self.btnMinimize)
+            self.hboxTitle.addWidget(self.btnRestore)
+            self.hboxTitle.addWidget(self.btnMaximize)
+            self.hboxTitle.addWidget(self.btnClose)
 
         # set window flags
         self.setWindowFlags(
