@@ -8,7 +8,7 @@ from qtpy.QtCore import Slot, QThread, Signal
 from qtpy.QtWidgets import QApplication, QMainWindow, QMessageBox, QTreeWidgetItem
 
 import qtmodern.styles
-import qtmodern.windows
+from qtmodern.csdwindows import ModernWindow
 
 
 _UI = join(dirname(abspath(__file__)), 'mainwindow.ui')
@@ -77,11 +77,12 @@ class MainWindow(QMainWindow):
         else:
             event.ignore()
 
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
     qtmodern.styles.dark(app)
-    mw = qtmodern.windows.ModernWindow(MainWindow())
+    mw = ModernWindow(MainWindow())
     mw.show()
 
     sys.exit(app.exec_())

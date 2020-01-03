@@ -5,6 +5,8 @@ import ctypes
 from qtpy.QtCore import QEvent
 from qtpy.QtWidgets import QWidget
 
+# from PyQt5.QtCore import Qt
+# print(Qt.WA_TranslucentBackground)
 
 class QCSDWindow(QWidget):
     """CSD Window (macOS)."""
@@ -13,7 +15,7 @@ class QCSDWindow(QWidget):
         super().__init__(parent)
 
         view = objc.objc_object(c_void_p=ctypes.c_void_p(int(self.winId())))
-        self._window = view._.window
+        self._window = view.window()
         self._hideTitlebar()
 
     def changeEvent(self, event):
