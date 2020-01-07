@@ -6,7 +6,7 @@ from qtpy.QtCore import QEvent
 from qtpy.QtWidgets import QWidget
 
 
-class QCSDWindow(QWidget):
+class BorderlessWindow(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 

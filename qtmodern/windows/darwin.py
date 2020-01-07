@@ -2,7 +2,7 @@ from qtpy.QtWidgets import QVBoxLayout
 from qtpy.QtWidgets import QWidget, QFrame, QHBoxLayout, QLabel, QSizePolicy
 from qtpy.QtCore import Qt, Slot
 
-from qtmodern._csd.darwin import QCSDWindow
+from qtmodern._borderless.darwin import BorderlessWindow
 
 
 class _MacOSTitleBar(QWidget):
@@ -36,7 +36,7 @@ class _MacOSTitleBar(QWidget):
         self.lbl_title.setText(title)
 
 
-class ModernWindow(QCSDWindow):
+class ModernWindow(BorderlessWindow):
     def __init__(self, window):
         super().__init__()
         self.hLayout = QVBoxLayout(self)

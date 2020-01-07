@@ -1,9 +1,9 @@
 from qtpy.QtWidgets import QVBoxLayout
 
-from qtmodern._csd.dummy import QCSDWindow
+from qtmodern._borderless.dummy import BorderlessWindow
 
 
-class ModernWindow(QCSDWindow):
+class ModernWindow(BorderlessWindow):
     def __init__(self, window):
         super().__init__()
         self.h_layout = QVBoxLayout(self)

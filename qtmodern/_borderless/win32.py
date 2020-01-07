@@ -29,7 +29,7 @@ class MARGINS(ct.Structure):
                 ('cyBottomHeight', ct.c_int)]
 
 
-class QCSDWindow(QWidget):
+class BorderlessWindow(QWidget):
     _border_width = 4
     """int: Default border width (for resize)."""
 
@@ -38,7 +38,7 @@ class QCSDWindow(QWidget):
 
         self._window_movers = []
 
-        # enable CSD
+        # enable borderless
         hWnd = ct.c_int(self.winId())
         margins = MARGINS(-1, -1, -1, -1)
         windll.dwmapi.DwmExtendFrameIntoClientArea(hWnd, ct.byref(margins))

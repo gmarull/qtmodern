@@ -1,5 +1,5 @@
 from qtpy.QtWidgets import QWidget
 
 
-class QCSDWindow(QWidget):
+class BorderlessWindow(QWidget):
     pass

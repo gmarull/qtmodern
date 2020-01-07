@@ -5,7 +5,7 @@ from qtpy.QtWidgets import QWidget, QHBoxLayout, QLabel, QSizePolicy, QToolButto
 from qtpy.QtCore import Qt, Slot, QEvent, QMetaObject
 from qtpy.QtGui import QIcon, QPixmap
 
-from qtmodern._csd.win32 import QCSDWindow
+from qtmodern._borderless.win32 import BorderlessWindow
 
 _RESOURCE = join(dirname(dirname(abspath(__file__))), "resources")
 
@@ -139,7 +139,7 @@ class _WindowsTitleBar(_TitleBar):
         self.application_icon.setIcon(icon)
 
 
-class ModernWindow(QCSDWindow):
+class ModernWindow(BorderlessWindow):
     def __init__(self, window):
         super().__init__()
         self.hLayout = QVBoxLayout(self)
