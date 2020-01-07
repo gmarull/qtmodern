@@ -30,14 +30,13 @@ class MARGINS(ct.Structure):
 
 
 class QCSDWindow(QWidget):
-    _DEF_BORDER_WIDTH = 8
+    _border_width = 4
     """int: Default border width (for resize)."""
 
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self._borderWidth = self._DEF_BORDER_WIDTH
-        self._draggers = []
+        self._window_movers = []
 
         # enable CSD
         hWnd = ct.c_int(self.winId())
@@ -45,7 +44,7 @@ class QCSDWindow(QWidget):
         windll.dwmapi.DwmExtendFrameIntoClientArea(hWnd, ct.byref(margins))
 
     def changeEvent(self, event):
-        # FIX: adjust window margins on Windows
+        # FIX: adjust window margins
         if event.type() == QEvent.WindowStateChange:
             if self.windowState() == Qt.WindowMaximized:
                 self.setContentsMargins(7, 7, 7, 7)
@@ -54,7 +53,7 @@ class QCSDWindow(QWidget):
 
         return super().changeEvent(event)
 
-    def nativeEvent(self, eventType, message):
+    def nativeEvent(self, _, message):
         # FIX: QTBUG-69074
         if qVersion() in ('5.11.0', '5.11.1'):
             msg = ct.POINTER(MSG).from_address(int(message))[0]
@@ -72,27 +71,27 @@ class QCSDWindow(QWidget):
             x = (msg.lParam & 0xFFFF)
             y = (msg.lParam >> 16)
 
-            if (wr.left <= x < wr.left + self._borderWidth and
-                    wr.bottom > y >= wr.bottom - self._borderWidth):
+            if (wr.left <= x < wr.left + self._border_width and
+                    wr.bottom > y >= wr.bottom - self._border_width):
                 ht = HTBOTTOMLEFT
-            elif (wr.right > x >= wr.right - self._borderWidth and
-                  wr.bottom > y >= wr.bottom - self._borderWidth):
+            elif (wr.right > x >= wr.right - self._border_width and
+                  wr.bottom > y >= wr.bottom - self._border_width):
                 ht = HTBOTTOMRIGHT
-            elif (wr.left <= x < wr.left + self._borderWidth and
-                  wr.top <= y < wr.top + self._borderWidth):
+            elif (wr.left <= x < wr.left + self._border_width and
+                  wr.top <= y < wr.top + self._border_width):
                 ht = HTTOPLEFT
-            elif (wr.right > x >= wr.right - self._borderWidth and
-                  wr.top <= y < wr.top + self._borderWidth):
+            elif (wr.right > x >= wr.right - self._border_width and
+                  wr.top <= y < wr.top + self._border_width):
                 ht = HTTOPRIGHT
-            elif wr.left <= x < wr.left + self._borderWidth:
+            elif wr.left <= x < wr.left + self._border_width:
                 ht = HTLEFT
-            elif wr.right > x >= wr.right - self._borderWidth:
+            elif wr.right > x >= wr.right - self._border_width:
                 ht = HTRIGHT
-            elif wr.bottom > y >= wr.bottom - self._borderWidth:
+            elif wr.bottom > y >= wr.bottom - self._border_width:
                 ht = HTBOTTOM
-            elif wr.top <= y < wr.top + self._borderWidth:
+            elif wr.top <= y < wr.top + self._border_width:
                 ht = HTTOP
-            elif QApplication.instance().widgetAt(QCursor.pos()) in self._draggers:
+            elif QApplication.instance().widgetAt(QCursor.pos()) in self._window_movers:
                 ht = HTCAPTION
 
             if ht is not None:
@@ -100,5 +99,5 @@ class QCSDWindow(QWidget):
 
         return False, 0
 
-    def addDragger(self, widget):
-        self._draggers.append(widget)
+    def add_window_mover(self, widget):
+        self._window_movers.append(widget)

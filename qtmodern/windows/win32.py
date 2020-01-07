@@ -32,58 +32,58 @@ QToolButton:hover {{
 class _TitleBar(QWidget):
     def __init__(self, parent=None):
         super(_TitleBar, self).__init__(parent)
-        self.hLayoutContent = QHBoxLayout()
-        self.hLayoutContent.setSpacing(0)
-        self.hLayoutContent.setContentsMargins(0, 0, 0, 0)
-        self.setLayout(self.hLayoutContent)
+        self.h_layout_content = QHBoxLayout()
+        self.h_layout_content.setSpacing(0)
+        self.h_layout_content.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(self.h_layout_content)
 
-        self.applicationIcon = QToolButton()
-        self.applicationIcon.setObjectName('applicationLogo')
+        self.application_icon = QToolButton()
+        self.application_icon.setObjectName('applicationLogo')
 
-        self.lblTitle = QLabel('Title')
-        self.lblTitle.setObjectName('lblTitle')
-        self.lblTitle.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
-        self.lblTitle.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        self.lbl_title = QLabel('Title')
+        self.lbl_title.setObjectName('lblTitle')
+        self.lbl_title.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+        self.lbl_title.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
 
-        spButtons = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sp_buttons = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
-        self.btnMinimize = QToolButton()
-        self.btnMinimize.setObjectName('btnMinimize')
-        self.btnMinimize.setSizePolicy(spButtons)
+        self.btn_minimize = QToolButton()
+        self.btn_minimize.setObjectName('btnMinimize')
+        self.btn_minimize.setSizePolicy(sp_buttons)
 
-        self.btnRestore = QToolButton()
-        self.btnRestore.setObjectName('btnRestore')
-        self.btnRestore.setSizePolicy(spButtons)
-        self.btnRestore.setVisible(False)
+        self.btn_restore = QToolButton()
+        self.btn_restore.setObjectName('btnRestore')
+        self.btn_restore.setSizePolicy(sp_buttons)
+        self.btn_restore.setVisible(False)
 
-        self.btnMaximize = QToolButton()
-        self.btnMaximize.setObjectName('btnMaximize')
-        self.btnMaximize.setSizePolicy(spButtons)
+        self.btn_maximize = QToolButton()
+        self.btn_maximize.setObjectName('btnMaximize')
+        self.btn_maximize.setSizePolicy(sp_buttons)
 
-        self.btnClose = QToolButton()
-        self.btnClose.setObjectName('btnClose')
-        self.btnClose.setSizePolicy(spButtons)
+        self.btn_close = QToolButton()
+        self.btn_close.setObjectName('btnClose')
+        self.btn_close.setSizePolicy(sp_buttons)
 
-        midlight = '#%02x%02x%02x' % self.palette().midlight().color().getRgb()[:-1]
-        button_style = _style.format(midlight)
+        color = '#%02x%02x%02x' % self.palette().midlight().color().getRgb()[:-1]
+        button_style = _style.format(color)
 
-        self.btnMinimize.setIcon(QIcon(QPixmap(join(_RESOURCE, "minimize.svg"))))
-        self.btnRestore.setIcon(QIcon(QPixmap(join(_RESOURCE, "restore.svg"))))
-        self.btnMaximize.setIcon(QIcon(QPixmap(join(_RESOURCE, "maximize.svg"))))
-        self.btnClose.setIcon(QIcon(QPixmap(join(_RESOURCE, "close.svg"))))
-        self.btnMinimize.setStyleSheet(button_style)
-        self.btnRestore.setStyleSheet(button_style)
-        self.btnMaximize.setStyleSheet(button_style)
-        self.btnClose.setStyleSheet(button_style)
-        self.applicationIcon.setStyleSheet("QToolButton { background-color: transparent; border: transparent;}")
+        self.btn_minimize.setIcon(QIcon(QPixmap(join(_RESOURCE, "minimize.svg"))))
+        self.btn_restore.setIcon(QIcon(QPixmap(join(_RESOURCE, "restore.svg"))))
+        self.btn_maximize.setIcon(QIcon(QPixmap(join(_RESOURCE, "maximize.svg"))))
+        self.btn_close.setIcon(QIcon(QPixmap(join(_RESOURCE, "close.svg"))))
+        self.btn_minimize.setStyleSheet(button_style)
+        self.btn_restore.setStyleSheet(button_style)
+        self.btn_maximize.setStyleSheet(button_style)
+        self.btn_close.setStyleSheet(button_style)
+        self.application_icon.setStyleSheet("QToolButton { background-color: transparent; border: transparent;}")
 
-        self.hLayoutContent.addWidget(self.applicationIcon)
+        self.h_layout_content.addWidget(self.application_icon)
 
-        self.hLayoutContent.addWidget(self.lblTitle)
-        self.hLayoutContent.addWidget(self.btnMinimize)
-        self.hLayoutContent.addWidget(self.btnRestore)
-        self.hLayoutContent.addWidget(self.btnMaximize)
-        self.hLayoutContent.addWidget(self.btnClose)
+        self.h_layout_content.addWidget(self.lbl_title)
+        self.h_layout_content.addWidget(self.btn_minimize)
+        self.h_layout_content.addWidget(self.btn_restore)
+        self.h_layout_content.addWidget(self.btn_maximize)
+        self.h_layout_content.addWidget(self.btn_close)
 
 
 class _WindowsTitleBar(_TitleBar):
@@ -92,52 +92,51 @@ class _WindowsTitleBar(_TitleBar):
         self._window = window
         self._window.installEventFilter(self)
 
-        self.applicationIcon.setIcon(self._window.windowIcon())
-        self._window.windowIconChanged.connect(self.on_windowIconChanged)
+        self.application_icon.setIcon(self._window.windowIcon())
+        self._window.windowIconChanged.connect(self.on_window_icon_changed)
 
-        self.lblTitle.setText(self._window.windowTitle())
-        self._window.windowTitleChanged.connect(self.on_windowTitleChanged)
+        self.lbl_title.setText(self._window.windowTitle())
+        self._window.windowTitleChanged.connect(self.on_window_title_changed)
+
+        self.btn_minimize.clicked.connect(self.on_btn_minimize_clicked)
+        self.btn_restore.clicked.connect(self.on_btn_restore_clicked)
+        self.btn_maximize.clicked.connect(self.on_btn_maximize_clicked)
+        self.btn_close.clicked.connect(self.on_btn_close_clicked)
 
         QMetaObject.connectSlotsByName(self)
 
     def eventFilter(self, obj, event):
         if event.type() == QEvent.WindowStateChange:
             if self._window.windowState() == Qt.WindowMaximized:
-                self.btnMaximize.setVisible(False)
-                self.btnRestore.setVisible(True)
+                self.btn_maximize.setVisible(False)
+                self.btn_restore.setVisible(True)
             else:
-                self.btnMaximize.setVisible(True)
-                self.btnRestore.setVisible(False)
+                self.btn_maximize.setVisible(True)
+                self.btn_restore.setVisible(False)
 
         return super().eventFilter(obj, event)
 
-    @Slot()
-    def on_btnMinimize_clicked(self):
+    def on_btn_minimize_clicked(self):
         self._window.setWindowState(Qt.WindowMinimized)
 
-    @Slot()
-    def on_btnRestore_clicked(self):
+    def on_btn_restore_clicked(self):
         self._window.setWindowState(Qt.WindowNoState)
-        self.btnMaximize.setVisible(True)
-        self.btnRestore.setVisible(False)
+        self.btn_maximize.setVisible(True)
+        self.btn_restore.setVisible(False)
 
-    @Slot()
-    def on_btnMaximize_clicked(self):
+    def on_btn_maximize_clicked(self):
         self._window.setWindowState(Qt.WindowMaximized)
-        self.btnMaximize.setVisible(False)
-        self.btnRestore.setVisible(True)
+        self.btn_maximize.setVisible(False)
+        self.btn_restore.setVisible(True)
 
-    @Slot()
-    def on_btnClose_clicked(self):
+    def on_btn_close_clicked(self):
         self._window.close()
 
-    @Slot(str)
-    def on_windowTitleChanged(self, title):
-        self.lblTitle.setText(title)
+    def on_window_title_changed(self, title):
+        self.lbl_title.setText(title)
 
-    @Slot(QIcon)
-    def on_windowIconChanged(self, icon):
-        self.applicationIcon.setIcon(icon)
+    def on_window_icon_changed(self, icon):
+        self.application_icon.setIcon(icon)
 
 
 class ModernWindow(QCSDWindow):
@@ -147,8 +146,8 @@ class ModernWindow(QCSDWindow):
         self.hLayout.setContentsMargins(0, 0, 0, 0)
         self.hLayout.setSpacing(0)
 
-        self.titlebar = _WindowsTitleBar(self, self)
+        self.title_bar = _WindowsTitleBar(self, self)
 
-        self.addDragger(self.titlebar.lblTitle)
-        self.hLayout.addWidget(self.titlebar)
+        self.add_window_mover(self.title_bar.lbl_title)
+        self.hLayout.addWidget(self.title_bar)
         self.hLayout.addWidget(window)

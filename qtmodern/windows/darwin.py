@@ -12,28 +12,28 @@ class _MacOSTitleBar(QWidget):
     def __init__(self, window, parent=None):
         super().__init__(parent)
 
-        self.hLayout = QHBoxLayout(self)
-        self.hLayout.setContentsMargins(0, 0, 0, 0)
+        self.h_layout = QHBoxLayout(self)
+        self.h_layout.setContentsMargins(0, 0, 0, 0)
 
-        self.frmContent = QFrame(self)
-        self.frmContent.setObjectName('frmContent')
-        self.hLayoutContent = QHBoxLayout()
-        self.hLayoutContent.setContentsMargins(0, 0, 0, 0)
+        self.frame_content = QFrame(self)
+        self.frame_content.setObjectName('frmContent')
+        self.h_layout_content = QHBoxLayout()
+        self.h_layout_content.setContentsMargins(0, 0, 0, 0)
 
-        self.lblTitle = QLabel(self.frmContent)
-        self.lblTitle.setObjectName('lblTitle')
-        self.lblTitle.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-        self.lblTitle.setFixedHeight(self._HEIGHT)
-        self.lblTitle.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        self.lblTitle.setText(window.windowTitle())
-        window.windowTitleChanged.connect(self.on_windowTitleChanged)
-        self.hLayout.addWidget(self.frmContent)
-        self.frmContent.setLayout(self.hLayoutContent)
-        self.hLayoutContent.addWidget(self.lblTitle)
+        self.lbl_title = QLabel(self.frame_content)
+        self.lbl_title.setObjectName('lblTitle')
+        self.lbl_title.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        self.lbl_title.setFixedHeight(self._HEIGHT)
+        self.lbl_title.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.lbl_title.setText(window.windowTitle())
+        self.h_layout.addWidget(self.frame_content)
+        self.frame_content.setLayout(self.h_layout_content)
+        self.h_layout_content.addWidget(self.lbl_title)
 
-    @Slot(str)
-    def on_windowTitleChanged(self, title):
-        self.lblTitle.setText(title)
+        window.windowTitleChanged.connect(self.on_window_title_changed)
+
+    def on_window_title_changed(self, title):
+        self.lbl_title.setText(title)
 
 
 class ModernWindow(QCSDWindow):

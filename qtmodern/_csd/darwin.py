@@ -12,20 +12,20 @@ class QCSDWindow(QWidget):
 
         view = objc.objc_object(c_void_p=ctypes.c_void_p(int(self.winId())))
         self._window = view.window()
-        self._hideTitlebar()
+        self._hide_title_bar()
 
     def changeEvent(self, event):
         super().changeEvent(event)
         # FIX for QTBUG-69975
         if event.type() == QEvent.WindowStateChange:
-            self._hideTitlebar()
+            self._hide_title_bar()
 
     def paintEvent(self, event):
         super().paintEvent(event)
-        # FIX: titlebar re-appears on some occasions
+        # FIX: title bar re-appears on some occasions
         self._window.setTitlebarAppearsTransparent_(True)
 
-    def _hideTitlebar(self):
+    def _hide_title_bar(self):
         self._window.setStyleMask_(
             self._window.styleMask() |
             Cocoa.NSFullSizeContentViewWindowMask)

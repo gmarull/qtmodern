@@ -6,7 +6,7 @@ from qtmodern._csd.dummy import QCSDWindow
 class ModernWindow(QCSDWindow):
     def __init__(self, window):
         super().__init__()
-        self.hLayout = QVBoxLayout(self)
-        self.hLayout.setContentsMargins(0, 0, 0, 0)
-        self.hLayout.setSpacing(0)
-        self.hLayout.addWidget(window)
+        self.h_layout = QVBoxLayout(self)
+        self.h_layout.setContentsMargins(0, 0, 0, 0)
+        self.h_layout.setSpacing(0)
+        self.h_layout.addWidget(window)
