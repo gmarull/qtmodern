@@ -7,8 +7,6 @@ from qtpy.QtWidgets import QWidget
 
 
 class QCSDWindow(QWidget):
-    """CSD Window (macOS)."""
-
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -28,7 +26,6 @@ class QCSDWindow(QWidget):
         self._window.setTitlebarAppearsTransparent_(True)
 
     def _hideTitlebar(self):
-        """Hide titlebar."""
         self._window.setStyleMask_(
             self._window.styleMask() |
             Cocoa.NSFullSizeContentViewWindowMask)

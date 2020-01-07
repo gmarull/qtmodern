@@ -4,8 +4,6 @@ from qtmodern._csd.dummy import QCSDWindow
 
 
 class ModernWindow(QCSDWindow):
-    """Main Window."""
-
     def __init__(self, window):
         super().__init__()
         self.hLayout = QVBoxLayout(self)

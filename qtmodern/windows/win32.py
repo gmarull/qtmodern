@@ -141,8 +141,6 @@ class _WindowsTitleBar(_TitleBar):
 
 
 class ModernWindow(QCSDWindow):
-    """Main Window."""
-
     def __init__(self, window):
         super().__init__()
         self.hLayout = QVBoxLayout(self)

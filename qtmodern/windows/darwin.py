@@ -6,8 +6,6 @@ from qtmodern._csd.darwin import QCSDWindow
 
 
 class _MacOSTitleBar(QWidget):
-    """Titlebar macOS Widget."""
-
     _HEIGHT = 22
     """int: Height."""
 
@@ -39,8 +37,6 @@ class _MacOSTitleBar(QWidget):
 
 
 class ModernWindow(QCSDWindow):
-    """Main Window."""
-
     def __init__(self, window):
         super().__init__()
         self.hLayout = QVBoxLayout(self)

@@ -23,7 +23,6 @@ HTBOTTOMRIGHT = 17
 
 
 class MARGINS(ct.Structure):
-    """MARGINS."""
     _fields_ = [('cxLeftWidth', ct.c_int),
                 ('cxRightWidth', ct.c_int),
                 ('cyTopHeight', ct.c_int),
@@ -31,8 +30,6 @@ class MARGINS(ct.Structure):
 
 
 class QCSDWindow(QWidget):
-    """Qt CSD Window (Windows)."""
-
     _DEF_BORDER_WIDTH = 8
     """int: Default border width (for resize)."""
 
@@ -104,10 +101,4 @@ class QCSDWindow(QWidget):
         return False, 0
 
     def addDragger(self, widget):
-        """Add dragger.
-
-        Args:
-            widget (QWidget): Widget.
-        """
-
         self._draggers.append(widget)
