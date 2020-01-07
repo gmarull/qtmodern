@@ -1,6 +1,6 @@
 from qtpy.QtWidgets import QVBoxLayout
 
-from qtmodern.csd.dummy import QCSDWindow
+from qtmodern._csd.dummy import QCSDWindow
 
 
 class ModernWindow(QCSDWindow):
