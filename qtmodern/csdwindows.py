@@ -1,4 +1,4 @@
-from qtpy.QtWidgets import QHBoxLayout
+from qtpy.QtWidgets import QVBoxLayout
 from qtmodern._utils import PLATFORM
 from qtmodern.csd import QCSDWindow
 
@@ -15,7 +15,7 @@ class ModernWindow(QCSDWindow):
 
     def __init__(self, window):
         super().__init__()
-        self.hLayout = QHBoxLayout(self)
+        self.hLayout = QVBoxLayout(self)
         self.hLayout.setContentsMargins(0, 0, 0, 0)
         self.hLayout.setSpacing(0)
 

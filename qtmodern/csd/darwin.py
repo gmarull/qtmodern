@@ -5,8 +5,6 @@ import ctypes
 from qtpy.QtCore import QEvent
 from qtpy.QtWidgets import QWidget
 
-# from PyQt5.QtCore import Qt
-# print(Qt.WA_TranslucentBackground)
 
 class QCSDWindow(QWidget):
     """CSD Window (macOS)."""
