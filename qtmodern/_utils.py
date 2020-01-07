@@ -11,3 +11,7 @@ RESOURCES = join(dirname(abspath(__file__)), 'resources')
 FL_STYLESHEET = join(RESOURCES, 'frameless.qss')
 RESTORE_ICON = join(RESOURCES, 'restore.svg')
 MAXIMIZE_ICON = join(RESOURCES, 'maximize.svg')
+
+
+PLATFORM_WINDOWS = "windows"
+PLATFORM_MACOS = "darwin"

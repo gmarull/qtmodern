@@ -8,7 +8,7 @@ from qtpy.QtCore import Slot, QThread, Signal
 from qtpy.QtWidgets import QApplication, QMainWindow, QMessageBox, QTreeWidgetItem
 
 import qtmodern.styles
-from qtmodern.csdwindows import ModernWindow
+from qtmodern.windows import ModernWindow
 
 
 _UI = join(dirname(abspath(__file__)), 'mainwindow.ui')
