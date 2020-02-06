@@ -51,6 +51,7 @@ def dark(app):
     darkPalette.setColor(QPalette.AlternateBase, QColor(66, 66, 66))
     darkPalette.setColor(QPalette.ToolTipBase, QColor(53, 53, 53))
     darkPalette.setColor(QPalette.ToolTipText, QColor(180, 180, 180))
+    darkPalette.setColor(QPalette.LinkVisited, QColor(80, 80, 80))
 
     # disabled
     darkPalette.setColor(QPalette.Disabled, QPalette.WindowText,
