@@ -52,8 +52,9 @@ class ModernWindow(QWidget):
             parent (QWidget, optional): Parent widget.
     """
 
-    def __init__(self, w, parent=None):
+    def __init__(self, w, parent=None, hideWindowButtons=False):
         QWidget.__init__(self, parent)
+        self.hideWindowButtons = hideWindowButtons
 
         self._w = w
         self.setupUi()
@@ -134,6 +135,13 @@ class ModernWindow(QWidget):
             self.hboxTitle.addWidget(self.btnMaximize)
             self.hboxTitle.addWidget(self.btnClose)
 
+        if self.hideWindowButtons:
+            self.hboxTitle.setContentsMargins(0, 5, 0, 0)
+            self.btnClose.hide()
+            self.btnMinimize.hide()
+            self.btnRestore.hide()
+            self.btnMaximize.hide()
+
         # set window flags
         self.setWindowFlags(
                 Qt.Window | Qt.FramelessWindowHint | Qt.WindowSystemMenuHint)
@@ -175,15 +183,17 @@ class ModernWindow(QWidget):
 
     @Slot()
     def on_btnRestore_clicked(self):
-        self.btnRestore.setVisible(False)
-        self.btnMaximize.setVisible(True)
+        if not self.hideWindowButtons:
+            self.btnRestore.setVisible(False)
+            self.btnMaximize.setVisible(True)
 
         self.setWindowState(Qt.WindowNoState)
 
     @Slot()
     def on_btnMaximize_clicked(self):
-        self.btnRestore.setVisible(True)
-        self.btnMaximize.setVisible(False)
+        if not self.hideWindowButtons:
+            self.btnRestore.setVisible(True)
+            self.btnMaximize.setVisible(False)
 
         self.setWindowState(Qt.WindowMaximized)
 
