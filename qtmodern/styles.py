@@ -1,10 +1,7 @@
-from os.path import join, dirname, abspath
-
 from qtpy.QtGui import QPalette, QColor
+from ._utils import QT_VERSION, resource_path
 
-from ._utils import QT_VERSION
-
-_STYLESHEET = join(dirname(abspath(__file__)), 'resources/style.qss')
+_STYLESHEET = resource_path('resources/style.qss')
 """ str: Main stylesheet. """
 
 

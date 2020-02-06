@@ -1,13 +1,10 @@
-from os.path import join, dirname, abspath
-
-from qtpy.QtCore import Qt, QMetaObject, Signal, Slot, QEvent
+from qtpy.QtCore import Qt, QMetaObject, Signal, Slot
 from qtpy.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QToolButton,
                             QLabel, QSizePolicy)
-from ._utils import QT_VERSION, PLATFORM
+from ._utils import QT_VERSION, PLATFORM, resource_path
 
 
-
-_FL_STYLESHEET = join(dirname(abspath(__file__)), 'resources/frameless.qss')
+_FL_STYLESHEET = resource_path('resources/frameless.qss')
 """ str: Frameless window stylesheet. """
 
 
