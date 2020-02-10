@@ -168,7 +168,23 @@ class ModernWindow(QWidget):
         super(ModernWindow, self).setWindowTitle(title)
         self.lblTitle.setText(title)
 
-    def _setWindowButtonState(self, button, state):
+    def _setWindowButtonState(self, hint, state):
+        btns = {
+            Qt.WindowCloseButtonHint: self.btnClose,
+            Qt.WindowMinimizeButtonHint: self.btnMinimize,
+            Qt.WindowMaximizeButtonHint: self.btnMaximize
+        }
+        button = btns.get(hint)
+
+        if button == self.btnMaximize:  # special rules for max/restore
+            if bool(self.windowState() & Qt.WindowMaximized):
+                self.btnRestore.setVisible(state)
+                self.btnMaximize.setVisible(False)
+            else:
+                self.btnRestore.setVisible(False)
+                self.btnMaximize.setVisible(state)
+            return
+
         button.setVisible(state)
         if False in [x.isHidden() for x in [self.btnClose, self.btnMinimize, self.btnMaximize, self.btnRestore]]:
             self.lblTitle.setContentsMargins(0, 0, 0, 0)
@@ -176,28 +192,17 @@ class ModernWindow(QWidget):
             self.lblTitle.setContentsMargins(0, 5, 0, 0)
 
     def setWindowFlag(self, Qt_WindowType, on=True):
-        btns = {
-            Qt.WindowCloseButtonHint: self.btnClose,
-            Qt.WindowMinimizeButtonHint: self.btnMinimize,
-            Qt.WindowMaximizeButtonHint: self.btnMaximize,
-            Qt.WindowFullscreenButtonHint: self.btnRestore
-        }
-        b = btns.get(Qt_WindowType, False)
+        buttonHints = [Qt.WindowCloseButtonHint, Qt.WindowMinimizeButtonHint, Qt.WindowMaximizeButtonHint]
 
-        if b:
-            self._setWindowButtonState(b, on)
+        if Qt_WindowType in buttonHints:
+            self._setWindowButtonState(Qt_WindowType, on)
         else:
             QWidget.setWindowFlag(self, Qt_WindowType, on)
 
     def setWindowFlags(self, Qt_WindowFlags):
-        btns = {
-            Qt.WindowCloseButtonHint: self.btnClose,
-            Qt.WindowMinimizeButtonHint: self.btnMinimize,
-            Qt.WindowMaximizeButtonHint: self.btnMaximize,
-            Qt.WindowFullscreenButtonHint: self.btnRestore
-        }
-        for hint, b in btns.items():
-            self._setWindowButtonState(b, bool(Qt_WindowFlags & hint))
+        buttonHints = [Qt.WindowCloseButtonHint, Qt.WindowMinimizeButtonHint, Qt.WindowMaximizeButtonHint]
+        for hint in buttonHints:
+            self._setWindowButtonState(hint, bool(Qt_WindowFlags & hint))
 
         QWidget.setWindowFlags(self, Qt_WindowFlags)
 
@@ -207,15 +212,17 @@ class ModernWindow(QWidget):
 
     @Slot()
     def on_btnRestore_clicked(self):
-        self.btnRestore.setVisible(False)
-        self.btnMaximize.setVisible(True)
+        if self.btnMaximize.isVisible() or self.btnRestore.isVisible():
+            self.btnRestore.setVisible(False)
+            self.btnMaximize.setVisible(True)
 
         self.setWindowState(Qt.WindowNoState)
 
     @Slot()
     def on_btnMaximize_clicked(self):
-        self.btnRestore.setVisible(True)
-        self.btnMaximize.setVisible(False)
+        if self.btnMaximize.isVisible() or self.btnRestore.isVisible():
+            self.btnRestore.setVisible(True)
+            self.btnMaximize.setVisible(False)
 
         self.setWindowState(Qt.WindowMaximized)
 
@@ -225,7 +232,7 @@ class ModernWindow(QWidget):
 
     @Slot()
     def on_titleBar_doubleClicked(self):
-        if self.btnMaximize.isVisible():
+        if not bool(self.windowState() & Qt.WindowMaximized):
             self.on_btnMaximize_clicked()
         else:
             self.on_btnRestore_clicked()
