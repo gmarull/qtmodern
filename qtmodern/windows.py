@@ -168,7 +168,7 @@ class ModernWindow(QWidget):
         super(ModernWindow, self).setWindowTitle(title)
         self.lblTitle.setText(title)
 
-    def _setWindowButtonState(self, button: QToolButton, state: bool):
+    def _setWindowButtonState(self, button, state):
         button.setVisible(state)
         if False in [x.isHidden() for x in [self.btnClose, self.btnMinimize, self.btnMaximize, self.btnRestore]]:
             self.lblTitle.setContentsMargins(0, 0, 0, 0)
