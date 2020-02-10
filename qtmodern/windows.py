@@ -203,7 +203,7 @@ class ModernWindow(QWidget):
         else:
             for b in allButtons:
                 b.setVisible(False)
-            self.lblTitle.setContentsMargins(0, 5, 0, 0)
+            self.lblTitle.setContentsMargins(0, 2, 0, 0)
 
     def setWindowFlag(self, Qt_WindowType, on=True):
         buttonHints = [Qt.WindowCloseButtonHint, Qt.WindowMinimizeButtonHint, Qt.WindowMaximizeButtonHint]
