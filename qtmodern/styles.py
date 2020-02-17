@@ -1,10 +1,7 @@
-from os.path import join, dirname, abspath
-
 from qtpy.QtGui import QPalette, QColor
+from ._utils import QT_VERSION, resource_path
 
-from ._utils import QT_VERSION
-
-_STYLESHEET = join(dirname(abspath(__file__)), 'resources/style.qss')
+_STYLESHEET = resource_path('resources/style.qss')
 """ str: Main stylesheet. """
 
 
@@ -51,6 +48,7 @@ def dark(app):
     darkPalette.setColor(QPalette.AlternateBase, QColor(66, 66, 66))
     darkPalette.setColor(QPalette.ToolTipBase, QColor(53, 53, 53))
     darkPalette.setColor(QPalette.ToolTipText, QColor(180, 180, 180))
+    darkPalette.setColor(QPalette.LinkVisited, QColor(80, 80, 80))
 
     # disabled
     darkPalette.setColor(QPalette.Disabled, QPalette.WindowText,
@@ -96,6 +94,7 @@ def light(app):
     lightPalette.setColor(QPalette.AlternateBase, QColor(225, 225, 225))
     lightPalette.setColor(QPalette.ToolTipBase, QColor(240, 240, 240))
     lightPalette.setColor(QPalette.ToolTipText, QColor(0, 0, 0))
+    lightPalette.setColor(QPalette.LinkVisited, QColor(222, 222, 222))
 
     # disabled
     lightPalette.setColor(QPalette.Disabled, QPalette.WindowText,
