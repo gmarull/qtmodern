@@ -1,6 +1,6 @@
 from qtpy.QtWidgets import QVBoxLayout
 from qtpy.QtWidgets import QWidget, QFrame, QHBoxLayout, QLabel, QSizePolicy
-from qtpy.QtCore import Qt, Slot
+from qtpy.QtCore import Qt
 
 from qtmodern._borderless.darwin import BorderlessWindow
 

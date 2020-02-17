@@ -1,13 +1,11 @@
-from os.path import join, dirname, abspath
-
 from qtpy.QtWidgets import QVBoxLayout
 from qtpy.QtWidgets import QWidget, QHBoxLayout, QLabel, QSizePolicy, QToolButton
-from qtpy.QtCore import Qt, Slot, QEvent, QMetaObject
+from qtpy.QtCore import Qt, QEvent, QMetaObject
 from qtpy.QtGui import QIcon, QPixmap
 
 from qtmodern._borderless.win32 import BorderlessWindow
+from qtmodern._utils import MINIMIZE_ICON, CLOSE_ICON, MAXIMIZE_ICON, RESTORE_ICON
 
-_RESOURCE = join(dirname(dirname(abspath(__file__))), "resources")
 
 _style = """
 QToolButton {{
@@ -67,10 +65,10 @@ class _TitleBar(QWidget):
         color = '#%02x%02x%02x' % self.palette().midlight().color().getRgb()[:-1]
         button_style = _style.format(color)
 
-        self.btn_minimize.setIcon(QIcon(QPixmap(join(_RESOURCE, "minimize.svg"))))
-        self.btn_restore.setIcon(QIcon(QPixmap(join(_RESOURCE, "restore.svg"))))
-        self.btn_maximize.setIcon(QIcon(QPixmap(join(_RESOURCE, "maximize.svg"))))
-        self.btn_close.setIcon(QIcon(QPixmap(join(_RESOURCE, "close.svg"))))
+        self.btn_minimize.setIcon(QIcon(QPixmap(MINIMIZE_ICON)))
+        self.btn_restore.setIcon(QIcon(QPixmap(RESTORE_ICON)))
+        self.btn_maximize.setIcon(QIcon(QPixmap(MAXIMIZE_ICON)))
+        self.btn_close.setIcon(QIcon(QPixmap(CLOSE_ICON)))
         self.btn_minimize.setStyleSheet(button_style)
         self.btn_restore.setStyleSheet(button_style)
         self.btn_maximize.setStyleSheet(button_style)
