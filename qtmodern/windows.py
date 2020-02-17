@@ -101,7 +101,6 @@ class ModernWindow(QWidget):
         self.btnRestore = QToolButton(self.titleBar)
         self.btnRestore.setObjectName('btnRestore')
         self.btnRestore.setSizePolicy(spButtons)
-        self.btnRestore.setVisible(False)
 
         self.btnMaximize = QToolButton(self.titleBar)
         self.btnMaximize.setObjectName('btnMaximize')
@@ -132,8 +131,8 @@ class ModernWindow(QWidget):
             self.hboxTitle.addWidget(self.btnClose)
 
         # set window flags
-        self.setWindowFlags(
-                Qt.Window | Qt.FramelessWindowHint | Qt.WindowSystemMenuHint)
+        self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.WindowCloseButtonHint |
+                            Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint)
 
         if QT_VERSION >= (5,):
             self.setAttribute(Qt.WA_TranslucentBackground)
@@ -166,21 +165,79 @@ class ModernWindow(QWidget):
         super(ModernWindow, self).setWindowTitle(title)
         self.lblTitle.setText(title)
 
+    def _setWindowButtonState(self, hint, state):
+        btns = {
+            Qt.WindowCloseButtonHint: self.btnClose,
+            Qt.WindowMinimizeButtonHint: self.btnMinimize,
+            Qt.WindowMaximizeButtonHint: self.btnMaximize
+        }
+        button = btns.get(hint)
+
+        maximized = bool(self.windowState() & Qt.WindowMaximized)
+
+        if button == self.btnMaximize:  # special rules for max/restore
+            self.btnRestore.setEnabled(state)
+            self.btnMaximize.setEnabled(state)
+
+            if maximized:
+                self.btnRestore.setVisible(state)
+                self.btnMaximize.setVisible(False)
+            else:
+                self.btnMaximize.setVisible(state)
+                self.btnRestore.setVisible(False)
+        else:
+            button.setEnabled(state)
+
+        allButtons = [self.btnClose, self.btnMinimize, self.btnMaximize, self.btnRestore]
+        if True in [b.isEnabled() for b in allButtons]:
+            for b in allButtons:
+                b.setVisible(True)
+            if maximized:
+                self.btnMaximize.setVisible(False)
+            else:
+                self.btnRestore.setVisible(False)
+            self.lblTitle.setContentsMargins(0, 0, 0, 0)
+        else:
+            for b in allButtons:
+                b.setVisible(False)
+            self.lblTitle.setContentsMargins(0, 2, 0, 0)
+
+    def setWindowFlag(self, Qt_WindowType, on=True):
+        buttonHints = [Qt.WindowCloseButtonHint, Qt.WindowMinimizeButtonHint, Qt.WindowMaximizeButtonHint]
+
+        if Qt_WindowType in buttonHints:
+            self._setWindowButtonState(Qt_WindowType, on)
+        else:
+            QWidget.setWindowFlag(self, Qt_WindowType, on)
+
+    def setWindowFlags(self, Qt_WindowFlags):
+        buttonHints = [Qt.WindowCloseButtonHint, Qt.WindowMinimizeButtonHint, Qt.WindowMaximizeButtonHint]
+        for hint in buttonHints:
+            self._setWindowButtonState(hint, bool(Qt_WindowFlags & hint))
+
+        QWidget.setWindowFlags(self, Qt_WindowFlags)
+
     @Slot()
     def on_btnMinimize_clicked(self):
         self.setWindowState(Qt.WindowMinimized)
 
     @Slot()
     def on_btnRestore_clicked(self):
-        self.btnRestore.setVisible(False)
-        self.btnMaximize.setVisible(True)
+        if self.btnMaximize.isEnabled() or self.btnRestore.isEnabled():
+            self.btnRestore.setVisible(False)
+            self.btnRestore.setEnabled(False)
+            self.btnMaximize.setVisible(True)
+            self.btnMaximize.setEnabled(True)
 
         self.setWindowState(Qt.WindowNoState)
 
     @Slot()
     def on_btnMaximize_clicked(self):
-        self.btnRestore.setVisible(True)
-        self.btnMaximize.setVisible(False)
+        if self.btnMaximize.isEnabled() or self.btnRestore.isEnabled():
+            self.btnRestore.setVisible(True)
+            self.btnRestore.setEnabled(True)
+            self.btnMaximize.setVisible(False)
+            self.btnMaximize.setEnabled(False)
 
         self.setWindowState(Qt.WindowMaximized)
 
@@ -190,7 +247,7 @@ class ModernWindow(QWidget):
 
     @Slot()
     def on_titleBar_doubleClicked(self):
-        if self.btnMaximize.isVisible():
+        if not bool(self.windowState() & Qt.WindowMaximized):
             self.on_btnMaximize_clicked()
         else:
             self.on_btnRestore_clicked()
