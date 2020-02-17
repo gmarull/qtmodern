@@ -1,8 +1,5 @@
 from qtpy.QtGui import QPalette, QColor
-from ._utils import QT_VERSION, resource_path
-
-_STYLESHEET = resource_path('resources/style.qss')
-""" str: Main stylesheet. """
+from ._utils import QT_VERSION, MODERN_STYLESHEET
 
 
 def _apply_base_theme(app):
@@ -17,7 +14,7 @@ def _apply_base_theme(app):
     else:
         app.setStyle('Fusion')
 
-    with open(_STYLESHEET) as stylesheet:
+    with open(MODERN_STYLESHEET) as stylesheet:
         app.setStyleSheet(stylesheet.read())
 
 
