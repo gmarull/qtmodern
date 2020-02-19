@@ -2,7 +2,7 @@ from qtpy.QtGui import QPalette, QColor
 from qtpy.QtCore import QIODevice, QTextStream
 from ._utils import QT_VERSION, MODERN_STYLESHEET
 from qtpy.QtCore import QFile
-import qtmodern.resources.resources as resources
+import qtmodern._resources_rc
 
 
 def _apply_base_theme(app):

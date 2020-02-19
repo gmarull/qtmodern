@@ -9,9 +9,9 @@ QT_VERSION = tuple(int(v) for v in qtpy.QT_VERSION.split('.'))
 FRAMELESS_STYLESHEET = ':/stylesheets/frameless.qss'
 MODERN_STYLESHEET = ':/stylesheets/style.qss'
 RESTORE_ICON = ':/icons/restore.svg'
-MAXIMIZE_ICON = ':/icon/maximize.svg'
-CLOSE_ICON = ':/icon/maximize.svg'
-MINIMIZE_ICON = ':/icon/minimize.svg'
+MAXIMIZE_ICON = ':/icons/maximize.svg'
+CLOSE_ICON = ':/icons/maximize.svg'
+MINIMIZE_ICON = ':/icons/minimize.svg'
 
 
 PLATFORM = platform.system().lower()

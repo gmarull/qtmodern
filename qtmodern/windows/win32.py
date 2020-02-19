@@ -5,7 +5,7 @@ from qtpy.QtGui import QIcon, QPixmap
 
 from qtmodern._borderless.win32 import BorderlessWindow
 from qtmodern._utils import MINIMIZE_ICON, CLOSE_ICON, MAXIMIZE_ICON, RESTORE_ICON
-
+import qtmodern._resources_rc
 
 _style = """
 QToolButton {{

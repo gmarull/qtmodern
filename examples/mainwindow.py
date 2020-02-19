@@ -43,7 +43,7 @@ class MainWindow(QMainWindow):
         self.thread.update.connect(self.update_progress)
         self.thread.start()
 
-        self.load_project_structure(dirname(dirname(abspath(__file__))), self.treeWidget)
+        self.load_project_structure(dirname(abspath(__file__)), self.treeWidget)
 
         for i in range(100):
             self.comboBox_2.addItem("item {}".format(i))
