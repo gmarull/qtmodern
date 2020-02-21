@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="stylesheets">
+    <file>style.qss</file>
+    <file>frameless.qss</file>
+  </qresource>
+</RCC>

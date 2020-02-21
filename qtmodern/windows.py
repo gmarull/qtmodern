@@ -1,11 +1,8 @@
-from qtpy.QtCore import Qt, QMetaObject, Signal, Slot
+from qtpy.QtCore import Qt, QMetaObject, Signal, Slot, QFile, QIODevice, QTextStream
 from qtpy.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QToolButton,
                             QLabel, QSizePolicy)
-from ._utils import QT_VERSION, PLATFORM, resource_path
-
-
-_FL_STYLESHEET = resource_path('resources/frameless.qss')
-""" str: Frameless window stylesheet. """
+from ._utils import QT_VERSION, PLATFORM, PLATFORM_MACOS, FRAMELESS_STYLESHEET
+import qtmodern._resources_rc
 
 
 class WindowDragger(QWidget):
@@ -117,7 +114,7 @@ class ModernWindow(QWidget):
 
         self.vboxWindow.addWidget(self.windowFrame)
 
-        if PLATFORM == "Darwin":
+        if PLATFORM in PLATFORM_MACOS:
             self.hboxTitle.addWidget(self.btnClose)
             self.hboxTitle.addWidget(self.btnMinimize)
             self.hboxTitle.addWidget(self.btnRestore)
@@ -138,8 +135,10 @@ class ModernWindow(QWidget):
             self.setAttribute(Qt.WA_TranslucentBackground)
 
         # set stylesheet
-        with open(_FL_STYLESHEET) as stylesheet:
-            self.setStyleSheet(stylesheet.read())
+        style = QFile(FRAMELESS_STYLESHEET)
+        style.open(QIODevice.ReadOnly)
+        self.setStyleSheet(QTextStream(style).readAll())
+        style.close()
 
         # automatically connect slots
         QMetaObject.connectSlotsByName(self)
