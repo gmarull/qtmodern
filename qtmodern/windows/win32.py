@@ -1,6 +1,6 @@
 from qtpy.QtWidgets import QVBoxLayout
 from qtpy.QtWidgets import QWidget, QHBoxLayout, QLabel, QSizePolicy, QToolButton
-from qtpy.QtCore import Qt, QEvent, QMetaObject
+from qtpy.QtCore import Qt, QEvent
 from qtpy.QtGui import QIcon, QPixmap
 
 from qtmodern._borderless.win32 import BorderlessWindow

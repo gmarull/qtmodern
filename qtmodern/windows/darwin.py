@@ -7,10 +7,9 @@ from qtmodern._borderless.darwin import BorderlessWindow
 
 class _MacOSTitleBar(QWidget):
     _HEIGHT = 22
-    """int: Height."""
 
-    def __init__(self, window, parent=None):
-        super().__init__(parent)
+    def __init__(self, modern_window, user_window):
+        super().__init__(modern_window)
 
         self.h_layout = QHBoxLayout(self)
         self.h_layout.setContentsMargins(0, 0, 0, 0)
@@ -25,25 +24,25 @@ class _MacOSTitleBar(QWidget):
         self.lbl_title.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.lbl_title.setFixedHeight(self._HEIGHT)
         self.lbl_title.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        self.lbl_title.setText(window.windowTitle())
+        self.lbl_title.setText(user_window.windowTitle())
         self.h_layout.addWidget(self.frame_content)
         self.frame_content.setLayout(self.h_layout_content)
         self.h_layout_content.addWidget(self.lbl_title)
 
-        window.windowTitleChanged.connect(self.on_window_title_changed)
+        user_window.windowTitleChanged.connect(self.on_window_title_changed)
 
     def on_window_title_changed(self, title):
         self.lbl_title.setText(title)
 
 
 class ModernWindow(BorderlessWindow):
-    def __init__(self, window):
+    def __init__(self, user_window):
         super().__init__()
         self.hLayout = QVBoxLayout(self)
         self.hLayout.setContentsMargins(0, 0, 0, 0)
         self.hLayout.setSpacing(0)
 
-        self.titlebar = _MacOSTitleBar(self, self)
+        self.titlebar = _MacOSTitleBar(self, user_window)
 
         self.hLayout.addWidget(self.titlebar)
-        self.hLayout.addWidget(window)
+        self.hLayout.addWidget(user_window)
