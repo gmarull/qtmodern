@@ -6,9 +6,10 @@ from os import listdir
 from qtpy import uic
 from qtpy.QtCore import Slot, QThread, Signal
 from qtpy.QtWidgets import QApplication, QMainWindow, QMessageBox, QTreeWidgetItem
+from qtpy.QtGui import QIcon
 
 import qtmodern.styles
-import qtmodern.windows
+from qtmodern.windows import ModernWindow
 
 
 _UI = join(dirname(abspath(__file__)), 'mainwindow.ui')
@@ -43,7 +44,10 @@ class MainWindow(QMainWindow):
         self.thread.update.connect(self.update_progress)
         self.thread.start()
 
-        self.load_project_structure(dirname(dirname(abspath(__file__))), self.treeWidget)
+        self.load_project_structure(dirname(abspath(__file__)), self.treeWidget)
+        self.setWindowTitle("qtmodern example window")
+
+        self.setWindowIcon(QIcon("icon.svg"))
 
         for i in range(100):
             self.comboBox_2.addItem("item {}".format(i))
@@ -77,11 +81,12 @@ class MainWindow(QMainWindow):
         else:
             event.ignore()
 
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
     qtmodern.styles.dark(app)
-    mw = qtmodern.windows.ModernWindow(MainWindow())
+    mw = ModernWindow(MainWindow())
     mw.show()
 
     sys.exit(app.exec_())

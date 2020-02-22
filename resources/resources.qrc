@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>maximize.svg</file>
+    <file>minimize.svg</file>
+    <file>restore.svg</file>
+    <file>close.svg</file>
+  </qresource>
+  <qresource prefix="stylesheets">
+    <file>frameless.qss</file>
+    <file>style.qss</file>
+  </qresource>
+</RCC>
