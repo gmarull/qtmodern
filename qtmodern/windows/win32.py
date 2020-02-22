@@ -85,27 +85,26 @@ class _TitleBar(QWidget):
 
 
 class _WindowsTitleBar(_TitleBar):
-    def __init__(self, window, parent=None):
-        super().__init__(parent)
-        self._window = window
-        self._window.installEventFilter(self)
+    def __init__(self, modern_window, user_window):
+        super().__init__(modern_window)
+        self.user_window = user_window
+        self.modern_window = modern_window
+        self.modern_window.installEventFilter(self)
 
-        self.application_icon.setIcon(self._window.windowIcon())
-        self._window.windowIconChanged.connect(self.on_window_icon_changed)
+        self.application_icon.setIcon(self.user_window.windowIcon())
+        self.user_window.windowIconChanged.connect(self.on_window_icon_changed)
 
-        self.lbl_title.setText(self._window.windowTitle())
-        self._window.windowTitleChanged.connect(self.on_window_title_changed)
+        self.lbl_title.setText(self.user_window.windowTitle())
+        self.user_window.windowTitleChanged.connect(self.on_window_title_changed)
 
         self.btn_minimize.clicked.connect(self.on_btn_minimize_clicked)
         self.btn_restore.clicked.connect(self.on_btn_restore_clicked)
         self.btn_maximize.clicked.connect(self.on_btn_maximize_clicked)
         self.btn_close.clicked.connect(self.on_btn_close_clicked)
 
-        QMetaObject.connectSlotsByName(self)
-
     def eventFilter(self, obj, event):
         if event.type() == QEvent.WindowStateChange:
-            if self._window.windowState() == Qt.WindowMaximized:
+            if self.modern_window.windowState() == Qt.WindowMaximized:
                 self.btn_maximize.setVisible(False)
                 self.btn_restore.setVisible(True)
             else:
@@ -115,20 +114,20 @@ class _WindowsTitleBar(_TitleBar):
         return super().eventFilter(obj, event)
 
     def on_btn_minimize_clicked(self):
-        self._window.setWindowState(Qt.WindowMinimized)
+        self.modern_window.setWindowState(Qt.WindowMinimized)
 
     def on_btn_restore_clicked(self):
-        self._window.setWindowState(Qt.WindowNoState)
+        self.modern_window.setWindowState(Qt.WindowNoState)
         self.btn_maximize.setVisible(True)
         self.btn_restore.setVisible(False)
 
     def on_btn_maximize_clicked(self):
-        self._window.setWindowState(Qt.WindowMaximized)
+        self.modern_window.setWindowState(Qt.WindowMaximized)
         self.btn_maximize.setVisible(False)
         self.btn_restore.setVisible(True)
 
     def on_btn_close_clicked(self):
-        self._window.close()
+        self.modern_window.close()
 
     def on_window_title_changed(self, title):
         self.lbl_title.setText(title)
@@ -138,14 +137,19 @@ class _WindowsTitleBar(_TitleBar):
 
 
 class ModernWindow(BorderlessWindow):
-    def __init__(self, window):
+    def __init__(self, user_window):
         super().__init__()
+        self.user_window = user_window
         self.hLayout = QVBoxLayout(self)
         self.hLayout.setContentsMargins(0, 0, 0, 0)
         self.hLayout.setSpacing(0)
 
-        self.title_bar = _WindowsTitleBar(self, self)
+        self.title_bar = _WindowsTitleBar(self, self.user_window)
 
         self.add_window_mover(self.title_bar.lbl_title)
         self.hLayout.addWidget(self.title_bar)
-        self.hLayout.addWidget(window)
+        self.hLayout.addWidget(self.user_window)
+
+    def closeEvent(self, event):
+        self.user_window.close()
+        event.setAccepted(self.user_window.isHidden())

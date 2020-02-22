@@ -44,6 +44,7 @@ class MainWindow(QMainWindow):
         self.thread.start()
 
         self.load_project_structure(dirname(abspath(__file__)), self.treeWidget)
+        self.setWindowTitle("qtmodern example window")
 
         for i in range(100):
             self.comboBox_2.addItem("item {}".format(i))
