@@ -111,6 +111,10 @@ class _WindowsTitleBar(_TitleBar):
                 self.btn_maximize.setVisible(True)
                 self.btn_restore.setVisible(False)
 
+            # Force reset hover states
+            self.btn_restore.setAttribute(Qt.WA_UnderMouse, False)
+            self.btn_maximize.setAttribute(Qt.WA_UnderMouse, False)
+
         return super().eventFilter(obj, event)
 
     def on_btn_minimize_clicked(self):
