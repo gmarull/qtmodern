@@ -6,6 +6,7 @@ from os import listdir
 from qtpy import uic
 from qtpy.QtCore import Slot, QThread, Signal
 from qtpy.QtWidgets import QApplication, QMainWindow, QMessageBox, QTreeWidgetItem
+from qtpy.QtGui import QIcon
 
 import qtmodern.styles
 from qtmodern.windows import ModernWindow
@@ -45,6 +46,8 @@ class MainWindow(QMainWindow):
 
         self.load_project_structure(dirname(abspath(__file__)), self.treeWidget)
         self.setWindowTitle("qtmodern example window")
+
+        self.setWindowIcon(QIcon("icon.svg"))
 
         for i in range(100):
             self.comboBox_2.addItem("item {}".format(i))

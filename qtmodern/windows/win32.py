@@ -1,5 +1,4 @@
-from qtpy.QtWidgets import QVBoxLayout
-from qtpy.QtWidgets import QWidget, QHBoxLayout, QLabel, QSizePolicy, QToolButton
+from qtpy.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout,QLabel, QSizePolicy, QToolButton
 from qtpy.QtCore import Qt, QEvent
 from qtpy.QtGui import QIcon, QPixmap
 
@@ -12,6 +11,7 @@ QToolButton {{
   background-color: transparent;
   border: transparent;
   padding: 0 10px;
+  height: 25px;
 }}
 
 QToolButton:hover {{
@@ -31,6 +31,9 @@ class _TitleBar(QWidget):
     def __init__(self, parent=None):
         super(_TitleBar, self).__init__(parent)
         self.h_layout_content = QHBoxLayout()
+        self.title_layout_content = QHBoxLayout()
+        self.title_layout_content.setSpacing(5)
+        self.title_layout_content.setContentsMargins(5, 0, 0, 0)
         self.h_layout_content.setSpacing(0)
         self.h_layout_content.setContentsMargins(0, 0, 0, 0)
         self.setLayout(self.h_layout_content)
@@ -75,9 +78,10 @@ class _TitleBar(QWidget):
         self.btn_close.setStyleSheet(button_style)
         self.application_icon.setStyleSheet("QToolButton { background-color: transparent; border: transparent;}")
 
-        self.h_layout_content.addWidget(self.application_icon)
+        self.title_layout_content.addWidget(self.application_icon)
 
-        self.h_layout_content.addWidget(self.lbl_title)
+        self.title_layout_content.addWidget(self.lbl_title)
+        self.h_layout_content.addLayout(self.title_layout_content)
         self.h_layout_content.addWidget(self.btn_minimize)
         self.h_layout_content.addWidget(self.btn_restore)
         self.h_layout_content.addWidget(self.btn_maximize)
