@@ -26,7 +26,7 @@ Installation
 
 The recommended way to install is by using ``pip``, i.e::
 
-    pip install qtmodern
+    pip install pyqt5 qtmodern
 
 Usage
 -----
@@ -35,13 +35,15 @@ In order to use ``qtmodern``, simply apply the style you want to your
 application and then, create a ``ModernWindow`` enclosing the window you want to
 *modernize*::
 
+    import sys
     import qtmodern.styles
     import qtmodern.windows
-
+    from PyQt5.QtWidgets import QApplication, QWidget
+    
     ...
 
-    app = QApplication()
-    win = YourWindow()
+    app = QApplication(sys.argv)
+    win = QWidget()
 
     qtmodern.styles.dark(app)
     mw = qtmodern.windows.ModernWindow(win)
