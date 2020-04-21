@@ -56,14 +56,14 @@ QScrollBar:vertical {
 }
 
 QScrollBar::handle:vertical {
-  background-color: palette(alternate-base);
+  background-color: palette(midlight);
   border-radius: 2px;
   min-height: 20px;
   margin: 2px 4px 2px 4px;
 }
 
 QScrollBar::handle:vertical:hover, QScrollBar::handle:horizontal:hover, QScrollBar::handle:vertical:pressed, QScrollBar::handle:horizontal:pressed {
-  background-color:palette(midlight);
+  background-color:palette(highlight);
 }
 
 QScrollBar::add-line:vertical {
@@ -87,7 +87,7 @@ QScrollBar:horizontal{
 }
 
 QScrollBar::handle:horizontal {
-  background-color: palette(alternate-base);
+  background-color: palette(midlight);
   border-radius: 2px;
   min-width: 20px;
   margin: 4px 2px 4px 2px;
