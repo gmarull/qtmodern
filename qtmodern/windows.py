@@ -1,4 +1,4 @@
-from qtpy.QtCore import Qt, QMetaObject, Signal, Slot
+from qtpy.QtCore import Qt, QMetaObject, Signal, Slot, QPoint
 from qtpy.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QToolButton,
                             QLabel, QSizePolicy)
 from ._utils import QT_VERSION, PLATFORM, resource_path
@@ -31,6 +31,17 @@ class WindowDragger(QWidget):
 
     def mouseMoveEvent(self, event):
         if self._mousePressed:
+            if self._window.windowState() == Qt.WindowMaximized:
+                # restore the window firstly
+                self._window.on_btnRestore_clicked()
+                # move the window back on the mouse
+                self._window.move(self._mousePos - QPoint(
+                    0.5 * self.geometry().width(),
+                    0.5 * self.geometry().height(),
+                ))
+                # refresh _windowPos
+                self._windowPos = self._window.pos()
+
             self._window.move(self._windowPos +
                               (event.globalPos() - self._mousePos))
 
