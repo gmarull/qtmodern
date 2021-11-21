@@ -82,6 +82,9 @@ class ModernWindow(QWidget):
         self.titleBar.setObjectName('titleBar')
         self.titleBar.setSizePolicy(QSizePolicy(QSizePolicy.Preferred,
                                                 QSizePolicy.Fixed))
+        # START ADD
+        self.titleBar.setStyleSheet("background-color: white; margin-top:1px")
+        # END ADD
 
         self.hboxTitle = QHBoxLayout(self.titleBar)
         self.hboxTitle.setContentsMargins(0, 0, 0, 0)
@@ -89,13 +92,33 @@ class ModernWindow(QWidget):
 
         self.lblTitle = QLabel('Title')
         self.lblTitle.setObjectName('lblTitle')
-        self.lblTitle.setAlignment(Qt.AlignCenter)
+        self.lblTitle.setAlignment(Qt.AlignLeft)
+        # START ADD
+        self.lblTitle.setAlignment(Qt.AlignVCenter)
+        self.lblTitle.setPixmap(QPixmap(":/newPrefix/jubot_large_rounded_square_converted.png"))
+        
+        self.icon = QLabel()
+        self.icon.setMinimumSize(QSize(32, 37))
+        self.icon.setMaximumSize(QSize(32, 37))
+        self.icon.setSizePolicy(QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored))
+        self.icon.setStyleSheet("padding-left: 10px; padding-right: 1px; padding-top:8px; padding-bottom: 8px; background-color: white; margin-top:1px; margin-left:1px")
+        self.icon.setPixmap(QPixmap(":/newPrefix/jubot_large_rounded_square_converted.png"))
+        self.icon.setScaledContents(True)
+        self.icon.setObjectName("icon")
+        
+        self.hboxTitle.addWidget(self.icon)
+        # END ADD
         self.hboxTitle.addWidget(self.lblTitle)
 
         spButtons = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
         self.btnMinimize = QToolButton(self.titleBar)
         self.btnMinimize.setObjectName('btnMinimize')
+        # START ADD
+        self.btnMinimize.setIcon(QPixmap(":/newPrefix/windows10_min_button.png"))
+        self.btnMinimize.setIconSize(QSize(55,33))
+        self.btnMinimize.setCursor(QCursor(Qt.PointingHandCursor))
+        # END ADD
         self.btnMinimize.setSizePolicy(spButtons)
         self.hboxTitle.addWidget(self.btnMinimize)
 
@@ -109,9 +132,17 @@ class ModernWindow(QWidget):
         self.btnMaximize.setObjectName('btnMaximize')
         self.btnMaximize.setSizePolicy(spButtons)
         self.hboxTitle.addWidget(self.btnMaximize)
+        # START ADD
+        self.btnMaximize.hide()
+        # END ADD
 
         self.btnClose = QToolButton(self.titleBar)
         self.btnClose.setObjectName('btnClose')
+        # START ADD
+        self.btnClose.setIcon(QPixmap(":/newPrefix/windows10_close_button.png"))
+        self.btnClose.setIconSize(QSize(55,33))
+        self.btnClose.setCursor(QCursor(Qt.PointingHandCursor))
+        # END ADD
         self.btnClose.setSizePolicy(spButtons)
         self.hboxTitle.addWidget(self.btnClose)
 
