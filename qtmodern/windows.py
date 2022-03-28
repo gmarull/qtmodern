@@ -31,7 +31,7 @@ class WindowDragger(QWidget):
 
     def mouseMoveEvent(self, event):
         if self._mousePressed:
-            if self._window.windowState() == Qt.WindowMaximized:
+            if self._window.windowState() == Qt.WindowMaximized and PLATFORM != "Darwin":
                 # restore the window firstly
                 self._window.on_btnRestore_clicked()
                 # move the window back on the mouse
